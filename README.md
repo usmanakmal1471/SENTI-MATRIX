@@ -1,2 +1,1 @@
-# SENTI-MATRIX
-Multidimensional Sentiment Analysis with Generative Transformer Models
+# SENTI-MATRIX: Multidimensional Sentiment Analysis with Generative Transformer Models
