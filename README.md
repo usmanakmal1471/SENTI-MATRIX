@@ -2,7 +2,7 @@
 *Python · PyTorch · Tranformners · HuggingFace · LoRA*
 
 **Description:**  
-SENTI-MATRIX evaluates and fine-tunes transformer models across multiple sentiment analysis tasks — intent-based, aspect-based, fine-grained, and emotion detection, using pretrained models, base model fine-tuning, and LoRA adapters for parameter-efficient learning.
+SENTI-MATRIX evaluates and fine-tunes transformer models across multiple sentiment analysis tasks including intent based, aspect based, fine grained, and emotion detection using pretrained models, base model fine tuning, and LoRA adapters for parameter efficient learning.
 
 ---
 
@@ -323,7 +323,7 @@ If you use this work or the SENTI-MATRIX framework, please cite it as follows:
 
 ## 🙏 Acknowledgements
 
-I would like to express my sincere gratitude to my supervisor, **Md. Easin Arafat**, and **Professor Tamás Orosz** for their invaluable guidance, constant encouragement, and technical expertise throughout this research.
+I would like to express my sincere gratitude to my supervisor, **Md. Easin Arafat**, **Ali S. Abosinnee** & **Professor Tamás Orosz** for their invaluable guidance, constant encouragement, and technical expertise throughout this research.
 
 My deepest thanks go to my **Parents** for their endless support and prayers, which have been my strength during this journey.
 
