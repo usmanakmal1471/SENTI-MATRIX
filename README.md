@@ -343,4 +343,4 @@ Budapest, Hungary
 📧 arafatmdeasin@inf.elte.hu
 
 ---
-                                                      *Made with ❤️ at ELTE, Budapest*
+                                                   *Made with ❤️ at ELTE, Budapest*
