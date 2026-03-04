@@ -18,7 +18,7 @@ SENTI-MATRIX evaluates and fine-tunes transformer models across multiple sentime
 - [Acknowledgements](#acknowledgements)
 
 ---
-## Overview
+## 📖 Overview
 SENTI-MATRIX addresses challenges in multidimensional sentiment analysis by combining:
 
 - **Pretrained Model Evaluation** — Benchmarking models pretrained on task-specific datasets.
@@ -105,3 +105,242 @@ The table summarizes the performance of transformer-based models across multiple
 |  | 🟣 LoRA Adapter DistilBERT | 93.40 | 90.61 | 668K | 2.1GB |
 
 *💡 LoRA adapters provide a **balance of high accuracy and computational efficiency**, updating only a small fraction of total parameters while reducing GPU memory usage.*
+
+## 🔎 Key Findings
+
+- **LoRA achieves competitive performance with minimal parameter updates**, often matching fully fine-tuned models while training less than 2% of total parameters.
+- **Fine-tuning and LoRA significantly improve performance on multi-class and fine-grained tasks**, where pretrained models alone are insufficient.
+- **Aspect-Based Sentiment Analysis benefits from task-specific adaptation**, particularly in combined domain datasets.
+- **LoRA reduces GPU memory consumption while maintaining strong accuracy**, making it suitable for resource-efficient deployment.
+
+---
+
+## 📁 Repository Structure
+
+```text
+SENTI-MATRIX/
+│
+├── Code/                             
+│   │
+│   ├── Aspect Based Sentiment (3 classes) Laptop + Restaurant ABSA Dataset 
+│   │   (Pretrained + Base Model + Adapter).ipynb
+│   ├── Aspect Based Sentiment (3 classes) Laptop ABSA Dataset 
+│   │   (Pretrained + Base Model + Adapter).ipynb
+│   ├── Aspect Based Sentiment (3 classes) Restaurant ABSA Dataset 
+│   │   (Pretrained + Base Model + Adapter).ipynb
+│   │
+│   ├── Emotion Detection Emotion Dataset 
+│   │   (Pretrained + Base Model + Adapter).ipynb
+│   │
+│   ├── Fine-Grained Sentiment Analysis (3 classes) E-Commerce Reviews 
+│   │   (Pretrained + Base Model + Adapter).ipynb
+│   ├── Fine-Grained Sentiment Analysis (5 classes) E-Commerce Reviews 
+│   │   (Pretrained + Base Model + Adapter).ipynb
+│   ├── Fine-Grained Sentiment Analysis (5 classes) Yelp Reviews 
+│   │   (Pretrained + Base Model + Adapter).ipynb
+│   ├── Fine-Grained Sentiment (5 classes) Yelp Reviews.ipynb
+│   │
+│   ├── Intent Based Sentiment (2 classes) IMDB Dataset 
+│   │   (Pretrained + Base Model + Adapter).ipynb
+│   └── Intent Based Sentiment (2 classes) SST-2 Dataset - Models 
+│       (Pretrained + Base Model + Adapter).ipynb
+│
+├── Dataset/                          
+│   │
+│   ├── E-Commerce Reviews (5 Classes).csv
+│   ├── E-Commerce Reviews (3 Classes).csv
+│   ├── Emotion Dataset (Small).csv
+│   ├── Laptop + Restaurant - ABSA.csv
+│   ├── Laptop - ABSA.csv
+│   ├── Restaurant - ABSA.csv
+│   ├── Twitter Dataset (3 Classes).csv
+│   ├── Yelp Reviews (3 Classes).csv
+│   ├── Yelp Reviews (5 Classes).csv
+│   └── IMDB Dataset (2 Classes).csv
+│
+└── README.md
+```
+
+## ⚙️ Installation
+
+Follow the steps below to set up the environment required to reproduce the experiments in **SENTI-MATRIX**.
+
+---
+
+### 1. System Requirements
+
+- Python 3.10 or higher  
+- pip package manager  
+- NVIDIA GPU (recommended for training)  
+- CUDA-enabled environment (for GPU acceleration)  
+- 8GB+ RAM (16GB recommended for large models)
+
+
+### 2. Clone the Repository
+
+```bash
+git clone https://github.com/usmanakmal1471/SENTI-MATRIX.git
+cd SENTI-MATRIX
+```
+
+### 3. Install Dependencies
+
+```bash
+# Create and activate a virtual environment
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+# Install required packages
+pip install torch torchvision torchaudio
+pip install transformers datasets peft evaluate
+pip install pandas scikit-learn matplotlib tqdm
+```
+---
+
+## 📊 Datasets
+
+The **SENTI-MATRIX** framework utilizes a diverse collection of benchmark and domain-specific datasets to evaluate model robustness across different levels of linguistic granularity. All datasets are pre-processed and stored in the `Dataset/` directory.
+
+| Task | Dataset | Classes | Description |
+| :--- | :--- | :---: | :--- |
+| **Intent-Based** | SST-2 / IMDb | 2 | Binary sentiment (Positive/Negative). |
+| **Intent-Based** | Twitter | 3 | Multi-class (Positive/Neutral/Negative). |
+| **Aspect-Based** | Laptop / Restaurant | 3 | Sentiment targeting specific entities (ABSA). |
+| **Fine-Grained** | E-Commerce / Yelp | 3 & 5 | Granular rating scales (1–5 stars). |
+| **Emotion** | Emotion Dataset | 6 | Sadness, Joy, Love, Anger, Fear, Surprise. |
+
+---
+
+## 🚀 Usage
+
+### Running the Experiments
+All experiments are contained within Jupyter Notebooks located in the `Code/` directory. Each notebook is self-contained and follows a three-stage evaluation pipeline:
+
+1.  **Pretrained Model Evaluation:** Benchmarking zero-shot or task-specific models from the Hugging Face Hub.
+2.  **Base Model Fine-Tuning:** Performing full-parameter fine-tuning on the target dataset.
+3.  **LoRA Adapter Training:** Implementing Parameter-Efficient Fine-Tuning (PEFT) using Low-Rank Adaptation.
+
+To reproduce the results, navigate to the `Code/` folder and run the desired notebook:
+
+```bash
+jupyter notebook "Code/Emotion Detection Emotion Dataset (Pretrained + Base Model + Adapter).ipynb"
+```
+### LoRA Implementation Snippet
+The following configuration is used across the models to ensure a balance between performance and efficiency:
+
+```python
+from peft import LoraConfig, get_peft_model
+
+# Standard LoRA configuration for Sequence Classification
+lora_config = LoraConfig(
+    task_type="SEQ_CLS",
+    r=16, 
+    lora_alpha=32,
+    target_modules=["query", "value"],
+    lora_dropout=0.1,
+    bias="none"
+)
+
+model = get_peft_model(base_model, lora_config)
+model.print_trainable_parameters()
+```
+## 🔧 PEFT Methods
+
+We utilize **LoRA (Low-Rank Adaptation)** as the primary PEFT strategy. This method freezes the pre-trained model weights and injects trainable rank decomposition matrices into each layer of the Transformer architecture.
+
+
+
+| Feature | Full Fine-Tuning | LoRA Adapter |
+| :--- | :--- | :--- |
+| **Trainable Parameters** | 100% | < 2% |
+| **GPU Memory Usage** | High | Low |
+| **Storage Requirement** | ~500MB+ per task | ~5MB - 10MB per task |
+| **Performance** | Baseline | Competitive / Superior |
+
+## 📏 Evaluation Metrics
+
+To rigorously assess the models, we categorize our evaluation into two distinct dimensions: **Performance** (Predictive Power) and **Efficiency** (Resource Utilization).
+
+### 1. Performance Metrics
+These metrics evaluate how accurately the model identifies sentiment and emotion across the datasets.
+
+* **Accuracy:** Overall percentage of correct predictions.
+* **Precision:** Ability of the classifier not to label a negative sample as positive.
+* **Recall:** Ability of the classifier to find all the positive samples.
+* **F1-Score (Weighted):** The harmonic mean of Precision and Recall, providing a balanced view for imbalanced classes.
+* **Similarity Score:** Measures the semantic closeness between predicted labels and ground truth.
+* **Confidence Score:** The probability/certainty level assigned by the model to its top prediction.
+
+### 2. Efficiency Metrics
+These metrics highlight the advantages of using **LoRA** and Parameter-Efficient Fine-Tuning over traditional methods.
+
+* **Training Time:** The total time required to converge during the fine-tuning process.
+* **Trainable Parameters:** The specific count of weights updated (e.g., 100% for Base Models vs. <2% for LoRA).
+* **GPU Storage:** Peak VRAM consumption during training and inference, measured in Gigabytes (GB).
+
+---
+
+Markdown
+## 📏 Evaluation Metrics
+
+The evaluation of **SENTI-MATRIX** is categorized into two distinct dimensions: **Performance Metrics** to measure predictive power and **Efficiency Metrics** to measure resource utilization.
+
+### 1. Performance Metrics
+These metrics assess how accurately the model identifies sentiment and emotion across the four task types.
+
+* **Accuracy:** Overall percentage of correct predictions.
+* **Precision:** The ability of the classifier not to label a negative sample as positive.
+* **Recall:** The ability of the classifier to find all the positive samples.
+* **F1-Score (Weighted):** The harmonic mean of Precision and Recall, providing a balanced view for imbalanced classes.
+* **Similarity Score:** Measures the semantic closeness between predicted labels and ground truth.
+* **Confidence Score:** The probability/certainty level assigned by the model to its top prediction.
+
+### 2. Efficiency Metrics
+These metrics highlight the advantages of using **LoRA** and Parameter-Efficient Fine-Tuning (PEFT).
+
+* **Training Time:** The total time (seconds/minutes) required for the model to converge.
+* **Trainable Parameters:** The count of weights updated (e.g., ~100M for Base Models vs. <1M for LoRA).
+* **GPU Storage:** Peak VRAM consumption during training and inference (measured in GB).
+
+---
+
+## 📝 Citation
+
+If you use this work or the SENTI-MATRIX framework, please cite it as follows:
+
+```bibtex
+@article{akmal2026sentimatrix,
+  title     = {SENTI-MATRIX: Multidimensional Sentiment Analysis with Generative Transformer Models},
+  author    = {Akmal, Muhammad Usman and 
+               Arafat, Md. Easin and 
+               Abosinnee, Ali S. and 
+               Orosz, Tam{\'a}s},
+  journal   = {Research Paper / Thesis Submission},
+  year      = {2026},
+  note      = {Not Submitted Yet}
+}
+```
+---
+
+## 🙏 Acknowledgements
+
+I would like to express my sincere gratitude to my supervisor, **Md. Easin Arafat**, and **Professor Tamás Orosz** for their invaluable guidance, constant encouragement, and technical expertise throughout this research.
+
+My deepest thanks go to my **Parents** for their endless support and prayers, which have been my strength during this journey.
+
+Lastly, I want to thank the **Department of Data Science at Eötvös Loránd University (ELTE)** for providing the academic environment and technical support necessary to complete this work.
+
+---
+
+## 📬 Contact
+
+**Muhammad Usman Akmal** Researcher, Faculty of Informatics, Eötvös Loránd University (ELTE)  
+Budapest, Hungary  
+📧 usman.hu1471@gmail.com
+
+**Md. Easin Arafat** Doctoral Fellow, Data Science and Engineering Department  
+Faculty of Informatics, Eötvös Loránd University (ELTE)  
+Budapest, Hungary  
+📧 arafatmdeasin@inf.elte.hu
+
+---
+                                                      *Made with ❤️ at ELTE, Budapest*
