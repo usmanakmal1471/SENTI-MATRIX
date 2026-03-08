@@ -138,7 +138,7 @@ SENTI-MATRIX/
 │   │   (Pretrained + Base Model + Adapter).ipynb
 │   ├── Fine-Grained Sentiment Analysis (5 classes) Yelp Reviews 
 │   │   (Pretrained + Base Model + Adapter).ipynb
-│   ├── Fine-Grained Sentiment (5 classes) Yelp Reviews.ipynb
+│   ├── Fine-Grained Sentiment Analysis (3 classes) Yelp Reviews (Pretrained + Base Model + Adapter).ipynb
 │   │
 │   ├── Intent Based Sentiment (2 classes) IMDB Dataset 
 │   │   (Pretrained + Base Model + Adapter).ipynb
