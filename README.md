@@ -122,28 +122,19 @@ SENTI-MATRIX/
 │
 ├── Code/                             
 │   │
-│   ├── Aspect Based Sentiment (3 classes) Laptop + Restaurant ABSA Dataset 
-│   │   (Pretrained + Base Model + Adapter).ipynb
-│   ├── Aspect Based Sentiment (3 classes) Laptop ABSA Dataset 
-│   │   (Pretrained + Base Model + Adapter).ipynb
-│   ├── Aspect Based Sentiment (3 classes) Restaurant ABSA Dataset 
-│   │   (Pretrained + Base Model + Adapter).ipynb
+│   ├── Aspect Based Sentiment (3 classes) Laptop + Restaurant ABSA Dataset.ipynb
+│   ├── Aspect Based Sentiment (3 classes) Laptop ABSA Dataset.ipynb
+│   ├── Aspect Based Sentiment (3 classes) Restaurant ABSA Dataset.ipynb
 │   │
-│   ├── Emotion Detection Emotion Dataset 
-│   │   (Pretrained + Base Model + Adapter).ipynb
+│   ├── Emotion Detection Emotion Dataset.ipynb
 │   │
-│   ├── Fine-Grained Sentiment Analysis (3 classes) E-Commerce Reviews 
-│   │   (Pretrained + Base Model + Adapter).ipynb
-│   ├── Fine-Grained Sentiment Analysis (5 classes) E-Commerce Reviews 
-│   │   (Pretrained + Base Model + Adapter).ipynb
-│   ├── Fine-Grained Sentiment Analysis (5 classes) Yelp Reviews 
-│   │   (Pretrained + Base Model + Adapter).ipynb
-│   ├── Fine-Grained Sentiment Analysis (3 classes) Yelp Reviews (Pretrained + Base Model + Adapter).ipynb
+│   ├── Fine-Grained Sentiment Analysis (3 classes) E-Commerce Reviews.ipynb
+│   ├── Fine-Grained Sentiment Analysis (5 classes) E-Commerce Reviews.ipynb
+│   ├── Fine-Grained Sentiment Analysis (5 classes) Yelp Reviews.ipynb
+│   ├── Fine-Grained Sentiment Analysis (3 classes) Yelp Reviews.ipynb
 │   │
-│   ├── Intent Based Sentiment (2 classes) IMDB Dataset 
-│   │   (Pretrained + Base Model + Adapter).ipynb
-│   └── Intent Based Sentiment (2 classes) SST-2 Dataset - Models 
-│       (Pretrained + Base Model + Adapter).ipynb
+│   ├── Intent Based Sentiment (2 classes) IMDB Dataset.ipynb
+│   └── Intent Based Sentiment (2 classes) SST-2 Dataset - Models.ipynb
 │
 ├── Dataset/                          
 │   │
