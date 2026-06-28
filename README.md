@@ -434,7 +434,7 @@ If you use SentiMatrix in your research, please cite:
 
 ## Acknowledgements
 
-The authors gratefully acknowledge the support of the Faculty of Excellence fellowship programme, Faculty of Informatics, Eötvös Loránd University, Budapest, Hungary (Job no. E19019/19). The authors also acknowledge the open-source communities behind the HuggingFace Transformers library, PyTorch, and the benchmark dataset providers whose resources made this research possible.
+The authors gratefully acknowledge the support of the Faculty of Excellence fellowship programme, Faculty of Informatics, Eötvös Loránd University, Budapest, Hungary (Work no. E19019/19). The authors also acknowledge the open-source communities behind the HuggingFace Transformers library, PyTorch, and the benchmark dataset providers whose resources made this research possible.
 
 ---
 
